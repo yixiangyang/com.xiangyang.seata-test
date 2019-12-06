@@ -2,7 +2,6 @@ package com.csp.tp.client;
 
 import java.util.Map;
 
-import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.xiangyang.vo.AccountVO;
 
-@FeignClient(name = "xiangyang-account" ,url = "http://localhost:10005")
+@org.springframework.cloud.netflix.feign.FeignClient(name = "xiangyang-account" ,url = "http://localhost:10005")
 public interface AccountClient {
 	
 	@RequestMapping(value= {"/v1/account"}, method= {RequestMethod.POST})

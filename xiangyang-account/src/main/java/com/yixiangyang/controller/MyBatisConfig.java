@@ -7,19 +7,36 @@ import org.springframework.context.annotation.Configuration;
 
 import io.seata.rm.datasource.DataSourceProxy;
 
+import javax.sql.DataSource;
+
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.transaction.SpringManagedTransactionFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 @Configuration
 public class MyBatisConfig {
 	 @Bean
 	    @ConfigurationProperties(prefix = "spring.datasource")
-	    public DruidDataSource druidDataSource() {
-	        return new DruidDataSource();
+	    public DataSource druidDataSource(){
+	        DruidDataSource druidDataSource = new DruidDataSource();
+	        return druidDataSource;
 	    }
 
 	    @Primary
-	    @Bean
-	    public DataSourceProxy dataSourceProxy(DruidDataSource druidDataSource) {
+	    @Bean("dataSource")
+	    public DataSourceProxy dataSource(DataSource druidDataSource){
 	        return new DataSourceProxy(druidDataSource);
+	    }
+
+	    @Bean
+	    public SqlSessionFactory sqlSessionFactory(DataSourceProxy dataSourceProxy)throws Exception{
+	        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+	        sqlSessionFactoryBean.setDataSource(dataSourceProxy);
+	        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
+	        .getResources("classpath*:/mapper/*.xml"));
+	        sqlSessionFactoryBean.setTransactionFactory(new SpringManagedTransactionFactory());
+	        return sqlSessionFactoryBean.getObject();
 	    }
 }
