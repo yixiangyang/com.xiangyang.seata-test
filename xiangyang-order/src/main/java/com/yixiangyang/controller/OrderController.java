@@ -40,5 +40,12 @@ public class OrderController implements OrderClient{
 		orderService.addOrder(order);
 		return null;
 	}
+
+	@RequestMapping(value= {"/v1/order"}, method= {RequestMethod.GET})
+	@Override
+	public String getOrderAA() {
+		
+		return "这个是服务33333333333333333333";
+	}
 	
 }

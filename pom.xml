@@ -46,11 +46,13 @@
           <version>0.2.0.RELEASE</version>
         </dependency>-->
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-eureka-server -->
-		<dependency>
-		    <groupId>org.springframework.cloud</groupId>
-		    <artifactId>spring-cloud-starter-eureka-server</artifactId>
-		    <version>1.4.0.RELEASE</version>
-		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-eureka -->
+	<dependency>
+	    <groupId>org.springframework.cloud</groupId>
+	    <artifactId>spring-cloud-starter-eureka</artifactId>
+	    <version>1.4.7.RELEASE</version>
+	</dependency>
+
 		        
         <dependency>
            <groupId>ch.qos.logback</groupId>

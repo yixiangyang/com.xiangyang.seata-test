@@ -2,14 +2,16 @@ package com.csp.tp.client;
 
 import java.util.Map;
 
+import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.csp.tp.feign.ClientConfig;
 import com.xiangyang.vo.OrderVO;
 
-
+@FeignClient(name = "xiangyang-order",configuration = ClientConfig.class)
 public interface OrderClient {
 	/**
 	 * 微信支付 统一下单
@@ -17,5 +19,8 @@ public interface OrderClient {
 	 */
 	@RequestMapping(value= {"/v1/order"}, method= {RequestMethod.POST})
 	public ResponseEntity<Map<String, String>> addOrder(@RequestBody OrderVO orderVO );
+	
+	@RequestMapping(value= {"/v1/order"}, method= {RequestMethod.GET})
+	public String getOrderAA();
 	
 }

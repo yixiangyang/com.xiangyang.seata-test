@@ -52,4 +52,12 @@ public class TestController {
 	public String getString() {
 		return accountClient.getString();
 	}
+	
+	@GetMapping("/v1/test1")
+	public String getFeignClient() {
+		System.out.println("-------------------------------------");
+		System.out.println(orderClient.getOrderAA());
+		System.out.println(orderClient.getOrderAA());
+		return orderClient.getOrderAA();
+	}
 }
